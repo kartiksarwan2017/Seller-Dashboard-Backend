@@ -101,7 +101,10 @@ module.exports.createSubCategory = async (req, res) => {
     
     try {
 
-        const {categoryId, sellerId, subCategoryName} = req.body;
+        const categoryId = req.params.categoryId;
+        const sellerId = req.params.sellerId;
+
+        const {subCategoryName} = req.body;
 
         const category = await Category.findOne({_id: categoryId});
         const seller = await Seller.findOne({_id: sellerId});
@@ -143,7 +146,10 @@ module.exports.createInventory = async (req, res) => {
 
     try {
 
-        const {categoryId, subCategoryId, productName, MRP, SellingPrice, quantity, productImage} = req.body;
+        const categoryId = req.params.categoryId;
+        const subCategoryId = req.params.subCategoryId;
+
+        const {productName, MRP, SellingPrice, quantity, productImage} = req.body;
 
         const category = await Category.findOne({_id: categoryId});
         const subCategory = await SubCategory.findOne({_id: subCategoryId});
