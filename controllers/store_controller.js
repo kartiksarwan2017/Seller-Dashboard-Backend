@@ -200,19 +200,15 @@ module.exports.ListAllInventories = async (req, res) => {
     const subCategoryId = req.params.subCategoryId;
     const inventoryList = []
 
-    console.log(subCategoryId);
-
     const subCategory = await SubCategory.find({_id: subCategoryId}).populate("inventory");
 
     const inventory  = subCategory.map((item, index) => {
        return item.inventory
-    })
+    });
 
     inventory[0].forEach((item) => {
        inventoryList.push(item);
-    })
-
-   console.log(inventoryList);
+    });
 
    return res.status(200).json({
     inventoryList: inventoryList,
