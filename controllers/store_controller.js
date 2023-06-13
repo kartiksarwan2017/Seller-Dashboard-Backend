@@ -198,13 +198,14 @@ module.exports.createInventory = async (req, res) => {
 module.exports.ListAllInventories = async (req, res) => {
 
     const subCategoryId = req.params.subCategoryId;
-    const inventoryList = []
+    const inventoryList = [];
 
     const subCategory = await SubCategory.find({_id: subCategoryId}).populate("inventory");
 
     const inventory  = subCategory.map((item, index) => {
        return item.inventory
     });
+
 
     inventory[0].forEach((item) => {
        inventoryList.push(item);
